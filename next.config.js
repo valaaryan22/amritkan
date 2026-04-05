@@ -1,0 +1,37 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  
+  // Image optimization
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+  },
+  
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
+  // Experimental features for better performance
+  experimental: {
+    // optimizeCss: true, // Disabled - causes critters module error
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-dialog'],
+  },
+  
+  // Compression
+  compress: true,
+  
+  // Production source maps (disabled for smaller bundle)
+  productionBrowserSourceMaps: false,
+}
+
+module.exports = nextConfig
